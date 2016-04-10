@@ -1,0 +1,21 @@
+Assignment New and Create:
+
+creating a model - "Product" with three attributes => title, description and price.
+
+The Product model file and folder are created in console - 'bin/rails g model product title:string description:text price:float'
+
+The attributes are genreally a hash item i.e. defining the key item and the type of value it will be (string, text, float, timestamps). 
+
+This will generate and populate the necessary files and folder in the project.
+
+In the console enter bin/rake db:migrate to create the 'Product' table / database.
+
+once that is set up the Products controller needs to be generated, this is done in the console: 'bin/rails g controller products' ** NOTE THE CONTROLLER IS SINGULAR AND PRODUCT IS PLURAL**
+
+To start, first configur the routes.db with new action 'get "/productS/new" => "productS#new", as: :new_product"
+** THE FIRST TWO ARE ALWAYS PLURAL AND THE LAST ONE IS SIGNULAR. WITH AN EXCEPTION **
+
+'post "/productS" => "productS#create", as: :productS'
+
+create the home page = 'root "home#index", as: :home'
+

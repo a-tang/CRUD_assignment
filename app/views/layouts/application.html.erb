@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Amazon</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <link rel="icon" href="http://www.communications-ink.net/wp-content/uploads/2015/03/Screen-Shot-2015-03-10-at-2.51.37-PM.png"</link>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+</head>
+<body>
+
+<%= link_to "Home", home_path %>
+|
+<%= link_to "New Products", new_product_path %>
+|
+<%= link_to "List Products", products_path %>
+<hr>
+<%= yield %>
+
+<img src="http://media.corporate-ir.net/media_files/IROL/97/97664/images/amazon_logo_RGB.jpg" alt="" />
+</body>
+</html>
