@@ -5,3 +5,6 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+100.times {FactoryGirl.create(:product)}
+
+puts Cowsay.say "Generated 100 products!"
