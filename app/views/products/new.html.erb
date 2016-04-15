@@ -11,6 +11,11 @@
 </div>
 
 <div>
+    <%= f.label :category %>
+    <%= f.collection_select :category_id, Category.order(:name), :id, :name %>
+</div>
+
+<div>
   <br>
   <%= f.label :description %>
   <%= f.text_area :description %>
@@ -23,6 +28,7 @@
   <%= f.text_field :price %>
 </div>
 <br>
+
   <%= f.submit %>
 
 <% end %>

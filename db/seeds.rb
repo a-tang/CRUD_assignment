@@ -5,6 +5,9 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-100.times {FactoryGirl.create(:product)}
+50.times {FactoryGirl.create(:product)}
+50.times do
+Category.create(name: Faker::Hacker.adjective)
+end
 
-puts Cowsay.say "Generated 100 products!"
+puts Cowsay.say("Generated a 100 questions!")

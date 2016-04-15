@@ -1,4 +1,7 @@
 class Product < ActiveRecord::Base
+has_many :reviews, dependent: :destroy
+belongs_to :category
+belongs_to :user
 before_validation :set_default_price
 
   validates :price, {presence: true}
@@ -11,6 +14,10 @@ before_validation :set_default_price
     price > sale_price
   end
 
+  def user_full_name
+    user ? user.full_name : ""
+  end
+
   private
 
   def set_default_price
@@ -20,6 +27,10 @@ before_validation :set_default_price
   #     sale_price
   #   end
     self.sale_price ||= price
+  end
+
+  def titleize_title
+  self.title = title.titleize
   end
 
 

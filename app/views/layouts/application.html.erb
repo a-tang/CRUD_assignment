@@ -5,9 +5,9 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <link rel="icon" href="http://www.communications-ink.net/wp-content/uploads/2015/03/Screen-Shot-2015-03-10-at-2.51.37-PM.png"</link>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 </head>
 <body>
 
@@ -16,6 +16,17 @@
 <%= link_to "New Products", new_product_path %>
 |
 <%= link_to "List Products", products_path %>
+|
+<% if user_signed_in? %>
+    Hello <%= current_user.first_name %>,
+  <%= link_to "Log out", sessions_path, method: :delete %>
+<% else %>
+  <%= link_to "Sign In", new_session_path %>
+  |
+  <%= link_to "Sign Up", new_user_path %>
+  <% end %>
+<hr>
+<%= notice || alert %>
 <hr>
 <%= yield %>
 

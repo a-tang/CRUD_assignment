@@ -1,5 +1,40 @@
 <h1><%= @product.title %></h1>
 <p><%= @product.description %></p>
+<p>Created By: <%= @product.user_full_name.titleize %></p>
+
 <p>Price: $<%= "%.2f" % @product.price %></p>
 <%= link_to "Edit", edit_product_path(@product) %>
 <%= link_to "Delete", product_path(@product), method: :delete, data: {confirm: "Are you sure?"} %>
+
+<hr>
+
+<%= @review.errors.full_messages.join(", ") %>
+<%#= form_helper @answer, url: product_reviews_path(@product) do |form_helper|%>
+<%= form_for [@product, @review] do |form_helper| %>
+<label for="review_stars" class="control-label">Rate This</label>
+<input id="review_stars" name="review[stars]" class="rating rating-loading" data-min="0" data-max="5" data-step="0.5">
+
+<br>
+<%= form_helper.label :body, "Review" %>
+<br>
+<%= form_helper.text_area :body %>
+<br>
+<%= form_helper.submit %>
+
+<% end %>
+
+<h2>Review</h2>
+<% @product.reviews.each do |ans| %>
+<hr>
+  <%= ans.stars %>
+  <%= ans.body %>
+  by: <%= ans.user_full_name.titleize %>
+<br>
+<%= link_to "delete", product_review_path(@product, ans),
+                                  data: {confirm: "Are you sure?"}, method: :delete%>
+<% end %>
+
+
+<script>
+  $(".rating").rating();
+</script>

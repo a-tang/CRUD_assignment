@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  # resources :products, only: [:new, :create]
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -25,16 +28,25 @@ Rails.application.routes.draw do
   #       get 'sold'
   #     end
   #   end
- get "/products/new"      => "products#new",    as: :new_product
- post "/products"         => "products#create", as: :products
- get "/products/:id"      => "products#show",   as: :product
- get "/products"          => "products#index"
- get "/products/:id/edit" =>  "products#edit",  as: :edit_product
-patch "/products/:id"     =>  "products#update"
-delete "/products/:id"   =>  "products#destroy"
-
+#  get "/products/new"      => "products#new",    as: :new_product
+#  post "/products"         => "products#create", as: :products
+#  get "/products/:id"      => "products#show",   as: :product
+#  get "/products"          => "products#index"
+#  get "/products/:id/edit" =>  "products#edit",  as: :edit_product
+# patch "/products/:id"     =>  "products#update"
+# delete "/products/:id"   =>  "products#destroy"
+#
  root "home#index", as: :home
+resources :users, only: [:new, :create]
+resources :sessions, only: [:new, :create] do
+  delete :destroy, on: :collection
+end
 
+
+resources :products do
+   resources :reviews, only: [:create, :destroy]
+
+ end
   # Example resource route with sub-resources:
   #   resources :products do
   #     resources :comments, :sales
