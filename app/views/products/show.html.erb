@@ -3,16 +3,27 @@
 <p>Created By: <%= @product.user_full_name.titleize %></p>
 
 <p>Price: $<%= "%.2f" % @product.price %></p>
+<% if can? :edit, @product %>
 <%= link_to "Edit", edit_product_path(@product) %>
+<% end %>
+<% if can? :destroy, @product %>
 <%= link_to "Delete", product_path(@product), method: :delete, data: {confirm: "Are you sure?"} %>
+<% end %>
 
+<% favourite = @product.favourite_for(current_user) %>
+<% if user_fave %>
+  <%= link_to "Un-fave", product_favourite_path(@product, user_fave), method: :delete %>
+<% else %>
+  <%= link_to "Favourite", product_favourites_path(@product), method: :post %>
+<% end %>
+(<%= @product.favourites.count %>)
 <hr>
 
 <%= @review.errors.full_messages.join(", ") %>
 <%#= form_helper @answer, url: product_reviews_path(@product) do |form_helper|%>
 <%= form_for [@product, @review] do |form_helper| %>
 <label for="review_stars" class="control-label">Rate This</label>
-<input id="review_stars" name="review[stars]" class="rating rating-loading" data-min="0" data-max="5" data-step="0.5">
+<input id="review_stars" name="review[stars]" class="rating rating-loading" data-min="0" data-max="5" data-step="0.5" data-show-clear="false">
 
 <br>
 <%= form_helper.label :body, "Review" %>
@@ -26,14 +37,18 @@
 <h2>Review</h2>
 <% @product.reviews.each do |ans| %>
 <hr>
+<i class="fa fa-star icon-yellow-star" aria-hidden="true"></i>
+<i class="fa fa-star icon-yellow-star" aria-hidden="true"></i>
+<i class="fa fa-star icon-yellow-star" aria-hidden="true"></i>
   <%= ans.stars %>
   <%= ans.body %>
   by: <%= ans.user_full_name.titleize %>
 <br>
+  <% if can? :destroy, ans %>
 <%= link_to "delete", product_review_path(@product, ans),
                                   data: {confirm: "Are you sure?"}, method: :delete%>
 <% end %>
-
+<% end %>
 
 <script>
   $(".rating").rating();

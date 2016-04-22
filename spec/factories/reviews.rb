@@ -1,7 +1,10 @@
 FactoryGirl.define do
   factory :review do
-    body "MyText"
-    stars 1.5
-    product nil
-  end
+
+    association :user, factory: :user
+    association :product, factory: :campaign
+    # product nil
+    body        { Faker::ChuckNorris.fact }
+    stars       { rand(5)}
+    end
 end

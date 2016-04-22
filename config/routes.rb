@@ -45,6 +45,7 @@ end
 
 resources :products do
    resources :reviews, only: [:create, :destroy]
+   resources :favourites, only: [:create, :destroy]
 
  end
   # Example resource route with sub-resources:

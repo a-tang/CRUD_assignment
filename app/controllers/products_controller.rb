@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
 before_action :authenticate_user!, except: [:index, :show]
 before_action(:find_product, {only: [:show, :edit, :update, :destroy]})
 
- #oiginal controllers
+ #original controllers
   def new
     @product = Product.new
   end
@@ -29,6 +29,13 @@ before_action(:find_product, {only: [:show, :edit, :update, :destroy]})
 
   def index
     @products = Product.all
+    if params[:search]
+      @products = Product.search(params[:search]).order("created_at DESC")
+    else
+      @products = Product.all.order('created_at DESC')
+    end
+    @products = @products.page(params[:page]).per(20)
+
   end
 
   def edit
@@ -50,9 +57,8 @@ before_action(:find_product, {only: [:show, :edit, :update, :destroy]})
     @product.destroy
     redirect_to products_path
   end
-end
 
-private
+  private
 
 def product_params
   product_params = params.require(:product).permit([:title, :description])
@@ -69,4 +75,4 @@ end
 #     @product = Product.new
 #   end
 #
-# end
+end

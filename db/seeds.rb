@@ -5,9 +5,30 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-50.times {FactoryGirl.create(:product)}
-50.times do
-Category.create(name: Faker::Hacker.adjective)
+User.create   (name: Alex
+               email: Faker::Internet.email,
+               department: ['Sales','Marketing','Technical'].sample,
+               message: Faker::Lorem.sentence)
+
+8.times do
+  Category.create(name: Faker::Commerce.department)
 end
 
+categories = Category.all
+
+100.times do
+  p = Product.create  title:        Faker::Company.bs,
+                      description:  Faker::Company.catch_phrase,
+                      price:        Faker::Commerce.price,
+                      category:     categories.shuffle.first
+  10.times do
+    random = rand(20)
+    if random < 10
+      p.reviews.create(body: Faker::StarWars.quote)
+    else
+      p.reviews.create(body: Faker::ChuckNorris.fact)
+    end
+  end
+
+end
 puts Cowsay.say("Generated a 100 questions!")

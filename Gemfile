@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
-
+gem 'cancancan'
+gem 'faker', github: "stympy/faker"
+gem 'kaminari'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use postgresql as the database for Active Record
@@ -38,7 +40,6 @@ group :development, :test do
   gem 'byebug'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
-  gem 'faker', github: "stympy/faker"
 end
 
 group :development do

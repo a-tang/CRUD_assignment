@@ -13,3 +13,13 @@
  *= require_tree .
  *= require_self
  */
+ .icon-white-star {
+    color: #888;
+ }
+
+ .icon-yellow-star
+ {
+  color: yellow;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: orange;
+ }
